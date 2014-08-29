@@ -19,7 +19,7 @@ def index():
 
 @app.route("/stock/<symbol>")
 def by_symbol(symbol):
-    return jsonify(trend=[stock.serialize() for stock in Stock.objects(Stock.name == symbol).allow_filtering()])
+    return jsonify(trends=[stock.serialize() for stock in Stock.objects(Stock.name == symbol).allow_filtering()])
 
 
 if __name__ == "__main__":

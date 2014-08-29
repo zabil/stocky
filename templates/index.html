@@ -3,33 +3,44 @@
     <link rel="stylesheet" href="static/css/bootstrap.css"/>
     <link rel="stylesheet" href="static/css/bootstrap-theme.css"/>
     <script src="static/js/lib/jquery-2.1.1.min.js" language="JavaScript"></script>
-    <script src="static/js/lib/bootstrap.js" language="JavaScript"></script>
+    <script src="static/js/lib/bootstrap.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/d3.v3.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/rickshaw.min.js" language="JavaScript"></script>
     <script src="static/js/lib/angular.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/angular-rickshaw/rickshaw.js" language="JavaScript"></script>
     <script src="static/js/application.js" language="JavaScript"></script>
 </head>
-<body ng-app="stocky">
-
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Stocky</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter Symbol" autofocus>
-                    </div>
-                    <button type="submit" class="btn btn-default">Go</button>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
+<body ng-app="stocky" ng-controller="StockDataController">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Stocky</a>
         </div>
-        <!-- /.container-fluid -->
-    </nav>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-right" role="search" ng-submit="search(symbol)">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter Symbol" autofocus ng-model="symbol">
+                </div>
+                <button type="submit" class="btn btn-default">Go</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <table ng-repeat="trend in data.trends" class="table table-condensed table-striped">
+        <tr>
+            <th>Date</th>
+            <th>Price</th>
+        </tr>
+        <tr ng-repeat="price in trend.prices">
+            <td>{[{price.date | date}]}</td>
+            <td>{[{price.price}]}</td>
+        </tr>
+    </table>
+
+    <h2 ng-hide="data">No data yet</h2>
 </div>
 </body>
 </html>
