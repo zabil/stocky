@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import jsonify
+from flask import render_template
 
 from model import Stock
 
@@ -13,7 +14,7 @@ migration.run()
 
 @app.route("/")
 def index():
-    return "Use /stock"
+    return render_template('index.html')
 
 
 @app.route("/stock/<symbol>")
