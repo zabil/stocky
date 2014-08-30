@@ -1,13 +1,16 @@
 <html>
 <head>
-    <link rel="stylesheet" href="static/css/bootstrap.css"/>
-    <link rel="stylesheet" href="static/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="static/css/chartist.min.css"/>
+    <script src="static/js/lib/jquery-2.1.1.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/lodash.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/moment.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/svg.min.js" language="JavaScript"></script>
+    <script src="static/js/lib/chartist.min.js" language="JavaScript"></script>
     <script src="static/js/lib/jquery-2.1.1.min.js" language="JavaScript"></script>
     <script src="static/js/lib/bootstrap.min.js" language="JavaScript"></script>
-    <script src="static/js/lib/d3.v3.min.js" language="JavaScript"></script>
-    <script src="static/js/lib/rickshaw.min.js" language="JavaScript"></script>
     <script src="static/js/lib/angular.min.js" language="JavaScript"></script>
-    <script src="static/js/lib/angular-rickshaw/rickshaw.js" language="JavaScript"></script>
     <script src="static/js/application.js" language="JavaScript"></script>
 </head>
 <body ng-app="stocky" ng-controller="StockDataController">
@@ -16,11 +19,10 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Stocky</a>
         </div>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-right" role="search" ng-submit="search(symbol)">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter Symbol" autofocus ng-model="symbol">
+                    <input type="text" class="form-control" placeholder="Enter Symbol" autofocus ng-model="symbol" ng-required="true">
                 </div>
                 <button type="submit" class="btn btn-default">Go</button>
             </form>
@@ -29,19 +31,12 @@
 </nav>
 
 <div class="container-fluid">
-    <h1 ng-show="data">Prices</h1>
-    <table ng-repeat="trend in data.trends" class="table table-condensed table-striped">
-        <tr>
-            <th>Date</th>
-            <th>Price</th>
-        </tr>
-        <tr ng-repeat="price in trend.prices">
-            <td>{[{price.date | date}]}</td>
-            <td>{[{price.price}]}</td>
-        </tr>
-    </table>
-
-    <h2 ng-hide="data">No data yet</h2>
+    <h3 ng-hide="trend && data" ng-show="!symbol">No trend found</h3>
+    <div ng-show="!symbol">
+        <h2>Search for an available symbol. e.g WPRO or INFY (mind the case)</h2>
+    </div>
+    <h1 ng-show="data">Trend</h1>
+    <div class="stock-chart"></div>
 </div>
 </body>
 </html>

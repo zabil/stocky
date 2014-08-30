@@ -1,4 +1,4 @@
-var stocky = angular.module('stocky', ['angular-rickshaw']);
+var stocky = angular.module('stocky', []);
 
 stocky.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');
@@ -9,8 +9,19 @@ stocky.controller('StockDataController', ['$scope', '$http', function($scope, $h
 
     $scope.search = function(symbol) {
         $http.get('stock/' + symbol).then(function(result){
-            $scope.data = result.data;
+            $scope.trend = _.first(result.data.trends);
+            if($scope.trend){
+                $scope.data = {
+                  labels:[],
+                  series: [
+                        _.flatten(_.first(result.data.trends).prices, 'price')
+                  ]
+                }
+             }
         });
     }
 
+    $scope.$watch('data', function(){
+            $scope.data && Chartist.Line('.stock-chart', $scope.data);
+    });
 }]);
