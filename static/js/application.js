@@ -18,10 +18,8 @@ stocky.controller('StockDataController', ['$scope', '$http', function($scope, $h
                   ]
                 }
              }
+             Chartist.Line('.stock-chart', $scope.data);
         });
     }
 
-    $scope.$watch('data', function(){
-            $scope.data && Chartist.Line('.stock-chart', $scope.data);
-    });
 }]);

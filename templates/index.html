@@ -22,7 +22,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-right" role="search" ng-submit="search(symbol)">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter Symbol" autofocus ng-model="symbol" ng-required="true">
+                    <input type="text" class="form-control" placeholder="Enter Symbol" autofocus ng-model="symbol"
+                           ng-required="true">
                 </div>
                 <button type="submit" class="btn btn-default">Go</button>
             </form>
@@ -31,12 +32,18 @@
 </nav>
 
 <div class="container-fluid">
-    <h3 ng-hide="trend && data" ng-show="!symbol">No trend found</h3>
+
     <div ng-show="!symbol">
-        <h2>Search for an available symbol. e.g WPRO or INFY (mind the case)</h2>
+        <h2>Search for a symbol e.g. WPRO or INFY (mind the case)</h2>
     </div>
-    <h1 ng-show="data">Trend</h1>
-    <div class="stock-chart"></div>
+
+    <h2 ng-show="!trend && data">No trend for {[{symbol}]}</h2>
+
+    <div ng-hide="!trend">
+        <h2>Trend</h2>
+    </div>
+    <span class="stock-chart"></span>
+
 </div>
 </body>
 </html>
