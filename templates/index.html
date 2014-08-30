@@ -33,11 +33,11 @@
 
 <div class="container-fluid">
 
-    <div ng-show="!symbol">
+    <div ng-show="!symbol && !data">
         <h2>Search for a symbol e.g. WPRO or INFY (mind the case)</h2>
     </div>
 
-    <h2 ng-show="!trend && data">No trend for {[{symbol}]}</h2>
+    <h2 ng-show="!trend && data">No trend found</h2>
 
     <div ng-hide="!trend">
         <h2>Trend</h2>
