@@ -34,6 +34,9 @@ def run():
         , datetime.date(2014, 12, 17): 254
         , datetime.date(2014, 12, 18): 267
         , datetime.date(2014, 12, 19): 270
+    }, events={
+        datetime.date(2014, 12, 13): "Something happened over here",
+        datetime.date(2014, 12, 19): "The bears are playing"
     })
 
     Stock.create(name="INFY", prices={
